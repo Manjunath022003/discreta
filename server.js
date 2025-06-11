@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/discreta")
+  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/discreta",{useNewUrlParser:true,useUnifiedTopology:true,})
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
