@@ -4,4 +4,4 @@ COPY package*.json ./
 RUN npm install --ignore-scripts
 COPY . .
 EXPOSE 4000
-CMD ["node","index.js"]
+CMD ["node","server.js"]
