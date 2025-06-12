@@ -15,7 +15,7 @@ function GamePage() {
 
   const fetchGID = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/game/${GName}`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/game/${GName}`);
       if (!response.ok) throw new Error(`Failed to fetch GID, status: ${response.status}`);
       const data = await response.json();
       return data.GID || Promise.reject("GID not found");
@@ -27,7 +27,7 @@ function GamePage() {
 
   const fetchOptions = async (qid) => {
     try {
-      const response = await fetch(`http://localhost:5000/options/${qid}`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/options/${qid}`);
       if (!response.ok) throw new Error(`Failed to fetch options for QID: ${qid}`);
       return await response.json();
     } catch (err) {
@@ -38,7 +38,7 @@ function GamePage() {
 
   const fetchQuestions = async (gid) => {
     try {
-      const response = await fetch(`http://localhost:5000/questions/${gid}`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/questions/${gid}`);
       if (!response.ok) throw new Error(`Failed to fetch questions, status: ${response.status}`);
       const data = await response.json();
 
