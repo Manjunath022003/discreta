@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - discreta_net
+
+  discreta_backend:
+    image: prajwal5028/discreta_gamified_learning:latest
+    container_name: discreta_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/discreta
+    depends_on:
+      - mongo
+    networks:
+      - discreta_net
+
+  discreta_frontend:
+    image: prajwal5028/discreta_frontend:latest
+    container_name: discreta_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_BASE_URL=http://discreta_backend:5000
+    depends_on:
+      - discreta_backend
+    networks:
+      - discreta_net
+
+volumes:
+  mongo_data:
+
+networks:
+  discreta_net:
+    driver: bridge
