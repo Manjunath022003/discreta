@@ -1,8 +1,11 @@
+version: '3.9'
+
 services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  # explicitly mention backend Dockerfile
+    image: discreta_gamified_learning
     ports:
       - "5000:5000"
     depends_on:
@@ -11,7 +14,8 @@ services:
   frontend:
     build:
       context: ./src
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  # explicitly mention frontend Dockerfile inside ./src
+    image: discreta_frontend
     ports:
       - "3000:3000"
 
