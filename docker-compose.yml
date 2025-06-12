@@ -10,7 +10,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI="mongodb://mongo:27017/discreta"
+      - MONGO_URI=mongodb://mongo:27017/discreta
     depends_on:
       - mongo
     networks:
