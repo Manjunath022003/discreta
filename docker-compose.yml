@@ -13,8 +13,8 @@ services:
 
   frontend:
     build:
-      context: ./src
-      dockerfile: Dockerfile  # explicitly mention frontend Dockerfile inside ./src
+      context: .
+      dockerfile: src/Dockerfile  # explicitly mention frontend Dockerfile inside ./src
     image: discreta_frontend
     ports:
       - "3000:3000"
