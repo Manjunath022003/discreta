@@ -1,30 +1,49 @@
 version: '3.9'
 
 services:
-  app:
+  discreta_backend:
     build:
       context: .
-      dockerfile: Dockerfile  # explicitly mention backend Dockerfile
-    image: discreta_gamified_learning
+      dockerfile: Dockerfile  # Backend Dockerfile in root
+    container_name: discreta_backend
+    image: discreta_backend
     ports:
       - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/discreta
     depends_on:
       - mongo
+    networks:
+      - discreta_net
 
-  frontend:
+  discreta_frontend:
     build:
       context: .
-      dockerfile: src/Dockerfile  # explicitly mention frontend Dockerfile inside ./src
+      dockerfile: src/Dockerfile  # Frontend Dockerfile inside ./src
+    container_name: discreta_frontend
     image: discreta_frontend
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_API_BASE_URL=http://discreta_backend:5000
+    depends_on:
+      - discreta_backend
+    networks:
+      - discreta_net
 
   mongo:
     image: mongo
+    container_name: mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - discreta_net
 
 volumes:
   mongo_data:
+
+networks:
+  discreta_net:
+    driver: bridge
