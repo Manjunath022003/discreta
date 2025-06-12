@@ -17,9 +17,7 @@ function StudentProfile() {
     // Fetch student's profile data
     const fetchProfileData = async () => {
       try {
-        const response = await fetch(
-          http://localhost:5000/student-profile?SEmail=${SEmail}
-        );
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/student-profile?SEmail=${SEmail}` );
         if (!response.ok) {
           throw new Error("Failed to fetch profile data");
         }
@@ -33,9 +31,7 @@ function StudentProfile() {
     // Fetch student's name (Assuming name is stored in localStorage)
     const fetchStudentName = async () => {
       try {
-        const response = await fetch(
-          http://localhost:5000/get-student-name?SEmail=${SEmail}
-        );
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/get-student-name?SEmail=${SEmail}`);
         if (!response.ok) {
           throw new Error("Failed to fetch student name");
         }
