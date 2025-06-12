@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+require('dotenv').config();
 // Initialize Express app
 const app = express();
 const PORT = 5000; // This allows it to fallback to 5000 or any other available port
@@ -13,10 +13,13 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI , {useNewUrlParser:true,useUnifiedTopology:true})
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("MongoDB connection error:", error));
+const mongoURI = process.env.MONGO_URI;
+if (!mongoURI) {
+  console.error("❌ MONGO_URI is not defined in environment variables");
+}
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // Define Student Schema
 const studentSchema = new mongoose.Schema({
