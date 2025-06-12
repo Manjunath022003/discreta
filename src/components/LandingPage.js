@@ -10,7 +10,7 @@ function LandingPage() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch("http://localhost:5000/games"); // Assuming this returns games as topics
+        const response = await fetch("${process.env.REACT_APP_API_BASE_URL}/games"); // Assuming this returns games as topics
         const data = await response.json();
         setGames(data); // Assuming response has game data
       } catch (error) {
