@@ -15,7 +15,7 @@ function AdminLogin() {
 
     // Send to backend for authentication
     try {
-      const response = await fetch("${process.env.REACT_APP_API_BASE_URL}/admin-login", {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/admin-login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(admin),
