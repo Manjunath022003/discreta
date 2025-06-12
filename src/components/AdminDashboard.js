@@ -9,7 +9,7 @@ function AdminDashboard() {
     // Fetch games from backend
     const fetchGames = async () => {
       try {
-        const response = await fetch("http://localhost:5000/games");
+        const response = await fetch("${process.env.REACT_APP_API_BASE_URL}/games");
         const data = await response.json();
         setGames(data);
       } catch (error) {
